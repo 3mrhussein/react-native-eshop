@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { router, useLocalSearchParams } from 'expo-router';
+import { Stack, router, useLocalSearchParams } from 'expo-router';
 import { getProductList, getProductListByCategory } from '@/DummyData';
 import ProductCard from '@/components/organisms/ProductCard/ProductCard';
 
@@ -32,22 +32,31 @@ const ProductsPage = () => {
       setProductList(getProductList(category, subCategory));
   }, [category, subCategory]);
   return (
-    <View className='items-center'>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        numColumns={2}
-        data={productList}
-        renderItem={({ item }) => (
-          <View className='py-4'>
-            <ProductCard
-              price={item.price}
-              title={item.name}
-              imgURL={item.image}
-            />
-          </View>
-        )}
+    <>
+      <Stack.Screen
+        options={{
+          headerBackTitleVisible: false,
+          headerTitle: subCategory ?? (category as string),
+          title: subCategory ?? (category as string),
+        }}
       />
-    </View>
+      <View className='items-center'>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          data={productList}
+          renderItem={({ item }) => (
+            <View className='py-4'>
+              <ProductCard
+                price={item.price}
+                title={item.name}
+                imgURL={item.image}
+              />
+            </View>
+          )}
+        />
+      </View>
+    </>
   );
 };
 

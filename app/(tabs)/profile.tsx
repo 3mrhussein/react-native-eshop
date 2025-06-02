@@ -1,4 +1,4 @@
-import { View, Image, FlatList, TouchableOpacity } from 'react-native';
+import { View, Image, FlatList, TouchableOpacity, Text } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getUserPosts, searchPosts } from '@/api/posts';
@@ -10,77 +10,49 @@ import InfoBox from '@/components/molecules/InfoBox/InfoBox';
 import { logoutUser } from '@/api/user';
 import { router } from 'expo-router';
 import { useGlobalContext } from '@/context/Global/GlobalProvider';
+import images from '@/constants/images';
+import TextComponent from '@/components/atoms/TextComponent/TextComponent';
+import LinkListItem from '@/components/molecules/LinkListItem/LinkListItem';
+
+const ItemContainer = ({ children }) => {
+  return <View className=' border-b border-gray-200 py-3 '>{children}</View>;
+};
 
 const Profile = () => {
-  const { user, setUser, setIsLoggedIn } = useGlobalContext();
-  const { data } = useFetchData(() => getUserPosts(user.$id));
-  const handleLogout = async () => {
-    const session = await logoutUser();
-    if (session) {
-      // setUser(null);
-      // setIsLoggedIn(false);
-      // router.replace('/sign-in');
-    }
-  };
   return (
-    <SafeAreaView className='bg-primary'>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        className='bg-primary h-full'
-        data={data}
-        keyExtractor={(item) => item?.$id}
-        renderItem={({ item }) => {
-          return <VideoCard video={item} />;
-        }}
-        ListEmptyComponent={
-          <EmptyState
-            title='No Videos Found'
-            subtitle='No videos found for this search'
-          />
-        }
-        ListHeaderComponent={
-          <>
-            <View className=' w-full justify-center items-center mt-6 mb-12 px-4'>
-              <TouchableOpacity
-                className='w-full items-end mb-10'
-                onPress={handleLogout}
-              >
-                <Image
-                  source={icons.logout}
-                  resizeMode='contain'
-                  className='w-6 h-6'
-                />
-              </TouchableOpacity>
-              <View className='w-16 h-16 border border-secondary rounded-lg justify-center items-center'>
-                <Image
-                  source={{ uri: user?.avatar }}
-                  className='w-[90%] h-[90%] rounded-lg'
-                  resizeMode='cover'
-                />
-              </View>
-              <InfoBox
-                title={user?.username || null}
-                containerStyles='mt-5'
-                titleStyles='text-lg'
-              />
-              <View className='mt-5 flex-row'>
-                <InfoBox
-                  title={data.length || 0}
-                  subtitle='posts'
-                  containerStyles='mr-10'
-                  titleStyles='text-xl'
-                />
-                <InfoBox
-                  title={'1.2k'}
-                  subtitle='Followers'
-                  titleStyles='text-lg'
-                />
-              </View>
-            </View>
-          </>
-        }
-      />
-    </SafeAreaView>
+    <>
+      <SafeAreaView edges={{ top: true }} />
+      <Text className='p-4 text-3xl font-pbold'>My Profile</Text>
+      <View className='flex-row m-2 mb-8'>
+        <Image
+          className='h-16 w-16 rounded-full mr-2'
+          source={images.logo}
+          resizeMode='cover'
+        />
+        <TextComponent title={'Amr'} subtitle={'pro3amr@gmail.com'} />
+      </View>
+      <ItemContainer>
+        <LinkListItem title='My orders' subtitle='Already have 12 orders' />
+      </ItemContainer>
+      <ItemContainer>
+        <LinkListItem title='Shipping addresses' subtitle='3 addresses' />
+      </ItemContainer>
+      <ItemContainer>
+        <LinkListItem title='Payment methods' subtitle='Visa **34' />
+      </ItemContainer>
+      <ItemContainer>
+        <LinkListItem
+          title='Promocodes'
+          subtitle='You have special promocodes'
+        />
+      </ItemContainer>
+      <ItemContainer>
+        <LinkListItem title='My reviews' subtitle='Reviews for 4 items' />
+      </ItemContainer>
+      <ItemContainer>
+        <LinkListItem title='Settings' subtitle='Notifications, password' />
+      </ItemContainer>
+    </>
   );
 };
 

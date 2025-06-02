@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import HeroBanner from '@/components/molecules/HeroBanner/HeroBanner';
 import ProductCard from '@/components/organisms/ProductCard/ProductCard';
 import CategoryPreview from '../containers/CategoryPreview/CategoryPreview';
+import LinkListItem from '@/components/molecules/LinkListItem/LinkListItem';
 const fakeCardsArray = ['', '', '', '', ''];
 const Home = () => {
   const { t } = useTranslation();
@@ -29,6 +30,7 @@ const Home = () => {
         isRTL={isRTL}
       />
       <View className='mb-2'>
+        <LinkListItem />
         <CategoryPreview to='/cart'>
           <FlatList
             horizontal

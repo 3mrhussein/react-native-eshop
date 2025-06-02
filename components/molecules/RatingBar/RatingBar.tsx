@@ -21,13 +21,14 @@ const RatingBar = ({
   AverageRating = 4.5,
   isRTL = false,
   spacing = 4,
+  size = 'lg',
 }) => {
   const starArray = getStarArray(AverageRating);
   return (
     <View className=' flex-row items-center'>
       {starArray.map((type, index) => (
         <Star
-          size={15}
+          size={size === 'md' ? 13 : size === 'sm' ? 12 : 15}
           key={index}
           type={type}
           style={{

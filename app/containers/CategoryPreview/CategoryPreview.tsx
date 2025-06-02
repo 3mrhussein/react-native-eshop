@@ -13,14 +13,18 @@ const CategoryPreview = ({
       <View className='mx-4'>
         <Pressable
           onPress={() => router.push(to)}
-          className='flex-row justify-between'
+          className={`flex-row justify-between ${!subtitle ? 'mb-2' : ''}`}
         >
-          <Text className=' text-2xl font-pbold'>{title}</Text>
-          <Text className=' text-xs self-end font-pregular '>View all</Text>
+          <Text className=' text-xl font-psemibold'>{title}</Text>
+          <Text className=' text-xs self-end font-light  text-gray-500 '>
+            View all
+          </Text>
         </Pressable>
-        <Text className='mb-5 text-xs font-light text-gray-400'>
-          {subtitle}{' '}
-        </Text>
+        {subtitle ? (
+          <Text className='mb-5 text-xs font-light text-gray-400'>
+            {subtitle}
+          </Text>
+        ) : null}
       </View>
       {children}
     </View>

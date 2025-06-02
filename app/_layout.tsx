@@ -2,6 +2,7 @@ import { SplashScreen, Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import GlobalProvider from '@/context/Global/GlobalProvider';
+import CartProvider from '@/context/Cart/CartProvider';
 
 SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
@@ -29,16 +30,18 @@ export default function RootLayout() {
   if (!fontsLoaded && !error) return null;
   return (
     <GlobalProvider>
-      <Stack>
-        <Stack.Screen name='index' options={{ headerShown: false }} />
-        <Stack.Screen name='(auth)' options={{ headerShown: false }} />
-        <Stack.Screen
-          name='(tabs)'
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Stack>
+      <CartProvider>
+        <Stack>
+          <Stack.Screen name='index' options={{ headerShown: false }} />
+          <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+          <Stack.Screen
+            name='(tabs)'
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack>
+      </CartProvider>
     </GlobalProvider>
   );
 }

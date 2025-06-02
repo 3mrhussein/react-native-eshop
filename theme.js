@@ -6,10 +6,11 @@ module.exports = {
       200: '#c1c1c1',
       300: '#B2B2B2',
       400: '#a2a2a2',
+      500: '#929292',
     },
     primary: { DEFAULT: '#00BBD6' },
     secondary: {
-      DEFAULT: '#CA2C36',
+      DEFAULT: '#db3023',
       100: '#FF9001',
       200: '#FF8E01',
     },

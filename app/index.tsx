@@ -53,7 +53,7 @@ export default function Index() {
           <CustomButton
             title={t('explore')}
             onPress={() => router.replace('/home')}
-            containerStyles='w-full bg-secondary'
+            containerStyles='w-full bg-secondary py-3'
             isLoading={false}
             textStyles={'text-gray-200'}
           />

@@ -63,7 +63,7 @@ const SubCategoryScreen = () => {
             }}
           />
         )}
-        data={filteredList[0].subcategories}
+        data={filteredList[0]?.subcategories}
         renderItem={({ item }) => (
           <SubCategoryComponent
             title={item.title}
